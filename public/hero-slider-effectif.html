@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIMOLAT FOOTBALL ACADEMY — First Team Squad (Hero Slider)</title>
+
+  <!-- Modern Athletic Typography: Barlow Condensed (Display) + Plus Jakarta Sans (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/players/striker.webp" fetchpriority="high" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    /* Custom Tailwind Theme Colors & Typography */
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0A0A0A',
+            anthracite: '#1A1A1A',
+            goldmetal: '#D4AF37',
+            neongreen: '#00FF66'
+          },
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Smooth Slide Reveal & Progress Bar Animations */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #0f172a;
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    @keyframes slideRevealUp {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 26px, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes playerPhotoEnter {
+      0% {
+        opacity: 0;
+        transform: translate3d(34px, 0, 0) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .anim-reveal-1 { animation: slideRevealUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .anim-reveal-2 { animation: slideRevealUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+    .anim-reveal-3 { animation: slideRevealUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both; }
+    .anim-photo-in { animation: playerPhotoEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    .stat-bar-fill {
+      transform-origin: left center;
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .player-photo-frame {
+      border-radius: 1.25rem;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.14);
+      background-color: #f8fafc;
+    }
+
+    #simolatHeroSlider:fullscreen,
+    #simolatHeroSlider:-webkit-full-screen,
+    #simolatHeroSlider.theater-fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
+      max-height: 100vh;
+      overflow-y: auto;
+      background-color: #ffffff;
+    }
+
+    #paginationContainer {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(180, 83, 9, 0.45) transparent;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .anim-reveal-1, .anim-reveal-2, .anim-reveal-3, .anim-photo-in {
+        animation: none !important;
+      }
+      .stat-bar-fill {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 antialiased selection:bg-emerald-600 selection:text-white">
+
+  <!-- =========================================================================
+       HERO SLIDER MAIN CONTAINER (100vw x min-h-[85vh])
+       Official 23-Player First Team Squad — SIMOLAT FOOTBALL ACADEMY
+       ========================================================================= -->
+  <section
+    id="simolatHeroSlider"
+    class="relative w-screen min-h-[85vh] bg-white overflow-hidden flex flex-col justify-between border-y border-slate-200"
+    style="background-color: #ffffff;"
+    aria-roledescription="carousel"
+    aria-label="Simolat Football Academy 23-Player Squad Showcase"
+  >
+    <!-- Pure White Surface (#ffffff) with subtle grid & warm/emerald depth accents -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_38%,rgba(212,175,55,0.08),transparent_52%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_80%,rgba(5,150,105,0.06),transparent_48%)]"></div>
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(to right, #0f172a 1px, transparent 1px), linear-gradient(to bottom, #0f172a 1px, transparent 1px); background-size: 64px 64px;"></div>
+    </div>
+
+    <!-- Top Header Bar: Academy Branding + Autoplay Toggle -->
+    <header class="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 pt-6 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-display text-xl sm:text-2xl font-extrabold tracking-[0.14em] uppercase text-emerald-800">
+          SIMOLAT FOOTBALL ACADEMY
+        </span>
+        <span class="hidden sm:inline text-slate-300">·</span>
+        <span class="hidden sm:inline text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
+          First Team · 23 Players
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <a
+          href="/"
+          class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs font-bold uppercase tracking-wider text-slate-800 transition-colors whitespace-nowrap shrink-0"
+        >
+          ← Main Portal
+        </a>
+        <button
+          id="btnToggleAutoplay"
+          type="button"
+          class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs font-bold uppercase tracking-wider text-slate-800 transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+        >
+          ⏸ Pause Auto
+        </button>
+        <button
+          id="btnToggleFullscreen"
+          type="button"
+          aria-pressed="false"
+          aria-label="Toggle full screen mode"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-amber-50 hover:bg-amber-600 border border-amber-400 text-xs font-bold uppercase tracking-wider text-amber-800 hover:text-white transition-colors cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <span>Full screen</span>
+        </button>
+        <button
+          id="btnExportSquadPdf"
+          type="button"
+          aria-label="Export 23-player squad roster as PDF"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-700 border border-emerald-900 text-xs font-bold uppercase tracking-wider text-white transition-colors cursor-pointer whitespace-nowrap shrink-0 disabled:opacity-60 disabled:cursor-wait focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <polyline points="9 15 12 18 15 15"></polyline>
+          </svg>
+          <span id="btnExportSquadPdfLabel">Export Squad PDF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Carousel Stage (Identity & Stats Left · Giant Watermark Number & Portrait Right) -->
+    <div class="relative z-10 flex-1 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 py-8 lg:py-10 flex items-center">
+      <div
+        id="sliderSlideContent"
+        class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center"
+      >
+        <!-- LEFT COLUMN: Academy Tag, Position, Massive Name, Bio & Animated Stat Bars -->
+        <div class="lg:col-span-6 space-y-6 order-2 lg:order-1">
+          <div class="anim-reveal-1 space-y-2">
+            <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.26em] text-emerald-700">
+              Simolat Football Academy · Ikoyi Lagos
+            </p>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-semibold uppercase tracking-widest text-amber-700">
+              <span id="playerPosition">Center Forward (ST)</span>
+              <span class="text-slate-300" aria-hidden="true">/</span>
+              <span id="playerShirtTag" class="tabular-nums text-slate-600">Jersey #09</span>
+            </div>
+          </div>
+
+          <div class="anim-reveal-2">
+            <p id="playerFirstName" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold uppercase tracking-[0.06em] text-slate-600 leading-none">
+              Tunde
+            </p>
+            <h1 id="playerLastName" class="font-display text-6xl sm:text-7xl lg:text-[6.25rem] font-black uppercase tracking-tight text-slate-900 leading-[0.88] mt-1">
+              Ogunleye
+            </h1>
+          </div>
+
+          <div class="anim-reveal-2 flex flex-wrap items-center gap-x-5 gap-y-2 py-3 border-y border-slate-200 text-xs sm:text-sm text-slate-700">
+            <div>
+              <span class="text-slate-500 uppercase tracking-wider text-[11px] block">Age</span>
+              <strong id="playerAge" class="text-slate-900 font-bold tabular-nums">19 yrs</strong>
+            </div>
+            <span class="text-slate-300" aria-hidden="true">|</span>
+            <div>
+              <span class="text-slate-500 uppercase tracking-wider text-[11px] block">Preferred Foot</span>
+              <strong id="playerFoot" class="text-slate-900 font-bold">Right</strong>
+            </div>
+            <span class="text-slate-300" aria-hidden="true">|</span>
+            <div>
+              <span class="text-slate-500 uppercase tracking-wider text-[11px] block">Nationality</span>
+              <strong id="playerNationality" class="text-slate-900 font-bold">Nigeria</strong>
+            </div>
+          </div>
+
+          <!-- 3 Key Animated Progress Bars: Pace, Dribbling, Shooting -->
+          <div class="anim-reveal-3 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4 max-w-xl shadow-sm">
+            <div>
+              <div class="flex items-center justify-between text-xs uppercase tracking-wider font-bold mb-1.5">
+                <span class="text-slate-700">Pace</span>
+                <span id="statSpeedVal" class="text-emerald-700 tabular-nums text-sm font-extrabold">92</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="statSpeedBar" class="stat-bar-fill h-full bg-gradient-to-r from-emerald-600 to-green-500 rounded-full" style="transform: scaleX(0.92);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-xs uppercase tracking-wider font-bold mb-1.5">
+                <span class="text-slate-700">Dribbling</span>
+                <span id="statDribbleVal" class="text-amber-700 tabular-nums text-sm font-extrabold">88</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="statDribbleBar" class="stat-bar-fill h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full" style="transform: scaleX(0.88);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-xs uppercase tracking-wider font-bold mb-1.5">
+                <span class="text-slate-700">Shooting</span>
+                <span id="statShotVal" class="text-slate-900 tabular-nums text-sm font-extrabold">94</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                <div id="statShotBar" class="stat-bar-fill h-full bg-gradient-to-r from-slate-600 to-slate-900 rounded-full" style="transform: scaleX(0.94);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Giant Watermark Jersey Number + Optimized WebP Portrait -->
+        <div class="lg:col-span-6 relative flex items-center justify-center min-h-[380px] sm:min-h-[470px] lg:min-h-[540px] order-1 lg:order-2">
+          <div
+            id="playerWatermarkNumber"
+            class="pointer-events-none select-none absolute inset-0 flex items-center justify-center font-display font-black leading-none text-slate-900/[0.06] tabular-nums"
+            style="font-size: clamp(13rem, 28vw, 24rem); letter-spacing: -0.04em;"
+            aria-hidden="true"
+          >
+            09
+          </div>
+
+          <div class="pointer-events-none absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-amber-300/20 blur-3xl" aria-hidden="true"></div>
+
+          <div id="playerPhotoWrap" class="anim-photo-in relative z-10 w-full max-w-[390px] sm:max-w-[440px] aspect-[3/4] flex items-end justify-center">
+            <img
+              id="playerPhotoImg"
+              src="/players/striker.webp"
+              alt="Official portrait of Tunde Ogunleye, Simolat Football Academy"
+              width="600"
+              height="800"
+              fetchpriority="high"
+              decoding="async"
+              class="player-photo-frame w-full h-full object-cover object-top select-none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Previous / Next Arrow Controls -->
+      <button
+        id="btnPrevPlayer"
+        type="button"
+        aria-label="Previous player"
+        class="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-emerald-700 text-slate-900 hover:text-white border border-slate-300 hover:border-emerald-700 flex items-center justify-center transition-all cursor-pointer shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button
+        id="btnNextPlayer"
+        type="button"
+        aria-label="Next player"
+        class="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-emerald-700 text-slate-900 hover:text-white border border-slate-300 hover:border-emerald-700 flex items-center justify-center transition-all cursor-pointer shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Bottom Interactive Numbered Pagination (01 to 23) -->
+    <footer class="relative z-20 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-14 pb-6 pt-2">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-slate-200 pt-4">
+        <nav aria-label="23-player pagination" class="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0">
+          <div id="paginationContainer" class="flex items-center gap-1"></div>
+        </nav>
+
+        <div class="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-slate-600 shrink-0 tabular-nums">
+          <span id="slideCounterLabel" class="text-amber-700 font-extrabold">01 / 23</span>
+          <span class="hidden md:inline text-slate-500">· Hover to pause · Swipe on mobile</span>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================
+       VANILLA JAVASCRIPT — 23-PLAYER SQUAD DATA & CAROUSEL CONTROLLER
+       ========================================================================= -->
+  <script>
+    /* =========================================================================
+       1. 23-PLAYER SQUAD DATASET
+       Edit player names, positions, ages, nationalities, stats (0-100), and
+       photo URLs (`photoUrl`) below.
+       ========================================================================= */
+    const SIMOLAT_SQUAD = [
+      {
+        firstName: "Tunde",
+        lastName: "Ogunleye",
+        number: "09",
+        position: "Center Forward (ST)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/striker.webp",
+        stats: { pace: 92, dribbling: 88, shooting: 94 }
+      },
+      {
+        firstName: "Ibrahim",
+        lastName: "Diallo",
+        number: "10",
+        position: "Attacking Midfielder (CAM)",
+        age: 18,
+        preferredFoot: "Left",
+        nationality: "Senegal",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 87, dribbling: 95, shooting: 86 }
+      },
+      {
+        firstName: "Chinedu",
+        lastName: "Okafor",
+        number: "11",
+        position: "Left Winger (LW)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/winger.webp",
+        stats: { pace: 96, dribbling: 91, shooting: 84 }
+      },
+      {
+        firstName: "Koffi",
+        lastName: "Mensah",
+        number: "04",
+        position: "Center Back (CB)",
+        age: 20,
+        preferredFoot: "Right",
+        nationality: "Ghana",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 81, dribbling: 74, shooting: 70 }
+      },
+      {
+        firstName: "Sadiq",
+        lastName: "Bello",
+        number: "01",
+        position: "Goalkeeper (GK)",
+        age: 20,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/goalkeeper.webp",
+        stats: { pace: 76, dribbling: 68, shooting: 72 }
+      },
+      {
+        firstName: "Adebayo",
+        lastName: "Balogun",
+        number: "07",
+        position: "Right Winger (RW)",
+        age: 18,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/winger.webp",
+        stats: { pace: 94, dribbling: 92, shooting: 85 }
+      },
+      {
+        firstName: "Moussa",
+        lastName: "Konaté",
+        number: "08",
+        position: "Central Midfielder (CM)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Ivory Coast",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 85, dribbling: 89, shooting: 83 }
+      },
+      {
+        firstName: "Yusuf",
+        lastName: "Danladi",
+        number: "05",
+        position: "Center Back (CB)",
+        age: 21,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 83, dribbling: 76, shooting: 69 }
+      },
+      {
+        firstName: "Kévin",
+        lastName: "Traoré",
+        number: "06",
+        position: "Defensive Midfielder (CDM)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Mali",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 82, dribbling: 84, shooting: 78 }
+      },
+      {
+        firstName: "Samuel",
+        lastName: "Adekunle",
+        number: "19",
+        position: "Second Striker (SS)",
+        age: 17,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/striker.webp",
+        stats: { pace: 91, dribbling: 90, shooting: 89 }
+      },
+      {
+        firstName: "Emeka",
+        lastName: "Nwosu",
+        number: "02",
+        position: "Right Back (RB)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 89, dribbling: 82, shooting: 74 }
+      },
+      {
+        firstName: "Babatunde",
+        lastName: "Lawal",
+        number: "03",
+        position: "Left Back (LB)",
+        age: 18,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 90, dribbling: 84, shooting: 73 }
+      },
+      {
+        firstName: "Seydou",
+        lastName: "Camara",
+        number: "12",
+        position: "Goalkeeper (GK)",
+        age: 18,
+        preferredFoot: "Right",
+        nationality: "Guinea",
+        photoUrl: "/players/goalkeeper.webp",
+        stats: { pace: 74, dribbling: 65, shooting: 68 }
+      },
+      {
+        firstName: "Taiwo",
+        lastName: "Ajayi",
+        number: "13",
+        position: "Left Back (LB)",
+        age: 19,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 88, dribbling: 81, shooting: 71 }
+      },
+      {
+        firstName: "Abdoulaye",
+        lastName: "Touré",
+        number: "14",
+        position: "Central Midfielder (CM)",
+        age: 20,
+        preferredFoot: "Right",
+        nationality: "Ivory Coast",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 84, dribbling: 88, shooting: 82 }
+      },
+      {
+        firstName: "Chukwudi",
+        lastName: "Eze",
+        number: "15",
+        position: "Center Back (CB)",
+        age: 19,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 80, dribbling: 73, shooting: 67 }
+      },
+      {
+        firstName: "Oluwaseun",
+        lastName: "Martins",
+        number: "16",
+        position: "Defensive Midfielder (CDM)",
+        age: 18,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 83, dribbling: 85, shooting: 79 }
+      },
+      {
+        firstName: "Ismaël",
+        lastName: "Ouattara",
+        number: "17",
+        position: "Right Winger (RW)",
+        age: 18,
+        preferredFoot: "Left",
+        nationality: "Burkina Faso",
+        photoUrl: "/players/winger.webp",
+        stats: { pace: 95, dribbling: 89, shooting: 82 }
+      },
+      {
+        firstName: "Victor",
+        lastName: "Akpoborie",
+        number: "18",
+        position: "Center Forward (ST)",
+        age: 20,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/striker.webp",
+        stats: { pace: 89, dribbling: 85, shooting: 92 }
+      },
+      {
+        firstName: "Femi",
+        lastName: "Adesanya",
+        number: "20",
+        position: "Attacking Midfielder (CAM)",
+        age: 17,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/midfielder.webp",
+        stats: { pace: 86, dribbling: 93, shooting: 84 }
+      },
+      {
+        firstName: "Emmanuel",
+        lastName: "Boateng",
+        number: "21",
+        position: "Right Back (RB)",
+        age: 20,
+        preferredFoot: "Right",
+        nationality: "Ghana",
+        photoUrl: "/players/defender.webp",
+        stats: { pace: 87, dribbling: 80, shooting: 72 }
+      },
+      {
+        firstName: "Kehinde",
+        lastName: "Bakare",
+        number: "22",
+        position: "Left Winger (LW)",
+        age: 18,
+        preferredFoot: "Right",
+        nationality: "Nigeria",
+        photoUrl: "/players/winger.webp",
+        stats: { pace: 93, dribbling: 90, shooting: 83 }
+      },
+      {
+        firstName: "Damilola",
+        lastName: "Salami",
+        number: "23",
+        position: "Goalkeeper (GK)",
+        age: 19,
+        preferredFoot: "Left",
+        nationality: "Nigeria",
+        photoUrl: "/players/goalkeeper.webp",
+        stats: { pace: 75, dribbling: 67, shooting: 70 }
+      }
+    ];
+
+    /* =========================================================================
+       2. HERO SLIDER INITIALIZATION & CONTROLLER
+       ========================================================================= */
+    (function () {
+      const sliderEl = document.getElementById("simolatHeroSlider");
+      const slideContentEl = document.getElementById("sliderSlideContent");
+      const paginationEl = document.getElementById("paginationContainer");
+      const counterLabelEl = document.getElementById("slideCounterLabel");
+      const btnPrev = document.getElementById("btnPrevPlayer");
+      const btnNext = document.getElementById("btnNextPlayer");
+      const btnAutoplay = document.getElementById("btnToggleAutoplay");
+      const btnFullscreen = document.getElementById("btnToggleFullscreen");
+      const btnExportPdf = document.getElementById("btnExportSquadPdf");
+      const btnExportPdfLabel = document.getElementById("btnExportSquadPdfLabel");
+
+      const elPosition = document.getElementById("playerPosition");
+      const elShirtTag = document.getElementById("playerShirtTag");
+      const elFirstName = document.getElementById("playerFirstName");
+      const elLastName = document.getElementById("playerLastName");
+      const elAge = document.getElementById("playerAge");
+      const elFoot = document.getElementById("playerFoot");
+      const elNationality = document.getElementById("playerNationality");
+      const elWatermark = document.getElementById("playerWatermarkNumber");
+      const elPhotoImg = document.getElementById("playerPhotoImg");
+      const elPhotoWrap = document.getElementById("playerPhotoWrap");
+
+      const elSpeedVal = document.getElementById("statSpeedVal");
+      const elSpeedBar = document.getElementById("statSpeedBar");
+      const elDribbleVal = document.getElementById("statDribbleVal");
+      const elDribbleBar = document.getElementById("statDribbleBar");
+      const elShotVal = document.getElementById("statShotVal");
+      const elShotBar = document.getElementById("statShotBar");
+
+      let currentIndex = 0;
+      let autoplayEnabled = true;
+      let isHovered = false;
+      let autoplayTimer = null;
+      const AUTOPLAY_INTERVAL_MS = 5500;
+      const preloadedUrls = new Set();
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      function preloadPhoto(url) {
+        if (!url || preloadedUrls.has(url)) return;
+        preloadedUrls.add(url);
+        const img = new Image();
+        img.src = url;
+      }
+
+      function buildPagination() {
+        paginationEl.innerHTML = "";
+        SIMOLAT_SQUAD.forEach((player, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.dataset.index = String(idx);
+          btn.setAttribute("aria-label", `Show ${player.firstName} ${player.lastName}`);
+          btn.className = "group flex flex-col items-center gap-1 px-1.5 py-1 rounded-md transition-colors cursor-pointer shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-600";
+          const numText = String(idx + 1).padStart(2, "0");
+          btn.innerHTML = `
+            <span class="pag-num font-display text-sm font-extrabold tabular-nums transition-colors">${numText}</span>
+            <span class="pag-bar block h-0.5 w-4 sm:w-5 rounded-full transition-all"></span>
+          `;
+          btn.addEventListener("click", () => {
+            goToSlide(idx);
+            restartAutoplayTimer();
+          });
+          paginationEl.appendChild(btn);
+        });
+      }
+
+      function updatePaginationUI() {
+        const buttons = paginationEl.querySelectorAll("button");
+        buttons.forEach((btn, idx) => {
+          const isActive = idx === currentIndex;
+          const numSpan = btn.querySelector(".pag-num");
+          const barSpan = btn.querySelector(".pag-bar");
+          btn.setAttribute("aria-current", isActive ? "true" : "false");
+          if (isActive) {
+            btn.classList.add("bg-emerald-50");
+            numSpan.className = "pag-num font-display text-sm font-extrabold tabular-nums text-emerald-700";
+            barSpan.className = "pag-bar block h-0.5 w-6 sm:w-7 rounded-full bg-amber-600";
+          } else {
+            btn.classList.remove("bg-emerald-50");
+            numSpan.className = "pag-num font-display text-sm font-extrabold tabular-nums text-slate-500 group-hover:text-slate-900";
+            barSpan.className = "pag-bar block h-0.5 w-4 sm:w-5 rounded-full bg-slate-300 group-hover:bg-slate-500";
+          }
+        });
+        const navWrap = paginationEl.parentElement;
+        const activeBtn = buttons[currentIndex];
+        if (activeBtn && navWrap && navWrap.scrollWidth > navWrap.clientWidth) {
+          const targetLeft = activeBtn.offsetLeft - (navWrap.clientWidth / 2) + (activeBtn.clientWidth / 2);
+          navWrap.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+        }
+        counterLabelEl.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${String(SIMOLAT_SQUAD.length).padStart(2, "0")}`;
+      }
+
+      function retriggerSlideAnimations() {
+        const animEls = slideContentEl.querySelectorAll(".anim-reveal-1, .anim-reveal-2, .anim-reveal-3");
+        animEls.forEach((el) => {
+          el.style.animation = "none";
+          void el.offsetHeight;
+          el.style.animation = "";
+        });
+        elPhotoWrap.style.animation = "none";
+        void elPhotoWrap.offsetHeight;
+        elPhotoWrap.style.animation = "";
+      }
+
+      function renderPlayer(index) {
+        const player = SIMOLAT_SQUAD[index];
+        if (!player) return;
+
+        elPosition.textContent = player.position;
+        elShirtTag.textContent = `Jersey #${player.number}`;
+        elFirstName.textContent = player.firstName;
+        elLastName.textContent = player.lastName;
+        elAge.textContent = `${player.age} yrs`;
+        elFoot.textContent = player.preferredFoot;
+        elNationality.textContent = player.nationality;
+        elWatermark.textContent = player.number;
+
+        elPhotoImg.src = player.photoUrl;
+        elPhotoImg.alt = `Official portrait of ${player.firstName} ${player.lastName}, Simolat Football Academy`;
+
+        const nextPlayer = SIMOLAT_SQUAD[(index + 1) % SIMOLAT_SQUAD.length];
+        if (nextPlayer) preloadPhoto(nextPlayer.photoUrl);
+
+        elSpeedVal.textContent = String(player.stats.pace);
+        elDribbleVal.textContent = String(player.stats.dribbling);
+        elShotVal.textContent = String(player.stats.shooting);
+
+        elSpeedBar.style.transform = "scaleX(0)";
+        elDribbleBar.style.transform = "scaleX(0)";
+        elShotBar.style.transform = "scaleX(0)";
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            elSpeedBar.style.transform = `scaleX(${Math.max(0, Math.min(100, player.stats.pace)) / 100})`;
+            elDribbleBar.style.transform = `scaleX(${Math.max(0, Math.min(100, player.stats.dribbling)) / 100})`;
+            elShotBar.style.transform = `scaleX(${Math.max(0, Math.min(100, player.stats.shooting)) / 100})`;
+          });
+        });
+
+        retriggerSlideAnimations();
+        updatePaginationUI();
+      }
+
+      function goToSlide(index) {
+        const total = SIMOLAT_SQUAD.length;
+        currentIndex = ((index % total) + total) % total;
+        renderPlayer(currentIndex);
+      }
+
+      function nextSlide() { goToSlide(currentIndex + 1); }
+      function prevSlide() { goToSlide(currentIndex - 1); }
+
+      function startAutoplayTimer() {
+        stopAutoplayTimer();
+        if (!autoplayEnabled || isHovered) return;
+        autoplayTimer = window.setInterval(nextSlide, AUTOPLAY_INTERVAL_MS);
+      }
+
+      function stopAutoplayTimer() {
+        if (autoplayTimer !== null) {
+          window.clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+      }
+
+      function restartAutoplayTimer() {
+        stopAutoplayTimer();
+        startAutoplayTimer();
+      }
+
+      function isSliderFullscreen() {
+        const nativeFsEl = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        return nativeFsEl === sliderEl || sliderEl.classList.contains("theater-fullscreen");
+      }
+
+      function updateFullscreenBtn() {
+        if (!btnFullscreen) return;
+        const active = isSliderFullscreen();
+        btnFullscreen.setAttribute("aria-pressed", active ? "true" : "false");
+        btnFullscreen.setAttribute("aria-label", active ? "Exit full screen mode" : "Toggle full screen mode");
+        btnFullscreen.innerHTML = active
+          ? '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg><span>Exit full screen</span>'
+          : '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg><span>Full screen</span>';
+      }
+
+      async function toggleFullscreen() {
+        const nativeFsEl = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+        if (nativeFsEl === sliderEl) {
+          try {
+            if (document.exitFullscreen) await document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            else if (document.msExitFullscreen) document.msExitFullscreen();
+          } catch (_) {}
+          sliderEl.classList.remove("theater-fullscreen");
+          updateFullscreenBtn();
+          return;
+        }
+        if (sliderEl.classList.contains("theater-fullscreen")) {
+          sliderEl.classList.remove("theater-fullscreen");
+          updateFullscreenBtn();
+          return;
+        }
+        const reqFs = sliderEl.requestFullscreen || sliderEl.webkitRequestFullscreen || sliderEl.msRequestFullscreen;
+        if (typeof reqFs === "function") {
+          try {
+            const res = reqFs.call(sliderEl);
+            if (res && typeof res.then === "function") await res;
+            updateFullscreenBtn();
+            return;
+          } catch (_) {}
+        }
+        sliderEl.classList.add("theater-fullscreen");
+        updateFullscreenBtn();
+      }
+
+      btnPrev.addEventListener("click", () => { prevSlide(); restartAutoplayTimer(); });
+      btnNext.addEventListener("click", () => { nextSlide(); restartAutoplayTimer(); });
+
+      btnAutoplay.addEventListener("click", () => {
+        autoplayEnabled = !autoplayEnabled;
+        btnAutoplay.textContent = autoplayEnabled ? "⏸ Pause Auto" : "▶ Auto Play";
+        if (autoplayEnabled) startAutoplayTimer();
+        else stopAutoplayTimer();
+      });
+
+      function loadScriptOnce(src) {
+        return new Promise((resolve, reject) => {
+          const existing = document.querySelector(`script[src="${src}"]`);
+          if (existing) {
+            if (window.jspdf && window.jspdf.jsPDF) {
+              resolve();
+            } else {
+              existing.addEventListener("load", () => resolve(), { once: true });
+              existing.addEventListener("error", () => reject(new Error("Script load failed")), { once: true });
+            }
+            return;
+          }
+          const s = document.createElement("script");
+          s.src = src;
+          s.async = true;
+          s.onload = () => resolve();
+          s.onerror = () => reject(new Error("Script load failed"));
+          document.head.appendChild(s);
+        });
+      }
+
+      async function exportSquadRosterPDF() {
+        if (!btnExportPdf) return;
+        btnExportPdf.disabled = true;
+        if (btnExportPdfLabel) btnExportPdfLabel.textContent = "Generating PDF...";
+        try {
+          if (!window.jspdf || !window.jspdf.jsPDF) {
+            await loadScriptOnce("https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js");
+          }
+          if (!window.jspdf || !window.jspdf.jsPDF) {
+            throw new Error("jsPDF unavailable");
+          }
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+          const pageW = doc.internal.pageSize.getWidth();
+          const margin = 12;
+          const contentW = pageW - margin * 2;
+
+          doc.setFillColor(10, 10, 10);
+          doc.rect(0, 0, pageW, 30, "F");
+          doc.setFillColor(212, 175, 55);
+          doc.rect(0, 30, pageW, 2, "F");
+
+          doc.setTextColor(212, 175, 55);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(16);
+          doc.text("SIMOLAT FOOTBALL ACADEMY", margin, 13);
+
+          doc.setTextColor(0, 255, 102);
+          doc.setFontSize(9.5);
+          doc.text("OFFICIAL FIRST TEAM ROSTER · 23 PLAYERS", margin, 20);
+
+          doc.setTextColor(203, 213, 225);
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(8);
+          doc.text(`Ikoyi Lagos & Isokun Ilesha • Generated ${new Date().toLocaleDateString("en-GB")}`, margin, 26);
+
+          const gkCount = SIMOLAT_SQUAD.filter((p) => p.position.includes("(GK)")).length;
+          const defCount = SIMOLAT_SQUAD.filter((p) => /\((CB|RB|LB)\)/.test(p.position)).length;
+          const midCount = SIMOLAT_SQUAD.filter((p) => /\((CDM|CM|CAM)\)/.test(p.position)).length;
+          const fwdCount = SIMOLAT_SQUAD.length - gkCount - defCount - midCount;
+
+          let y = 38;
+          doc.setFillColor(236, 253, 245);
+          doc.setDrawColor(16, 185, 129);
+          doc.roundedRect(margin, y, contentW, 10, 2, 2, "FD");
+          doc.setTextColor(6, 95, 70);
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(8.5);
+          doc.text(`SQUAD DEPTH: ${SIMOLAT_SQUAD.length} PLAYERS   |   GK: ${gkCount}   ·   DEF: ${defCount}   ·   MID: ${midCount}   ·   FWD / WNG: ${fwdCount}`, margin + 4, y + 6.5);
+
+          y += 15;
+          const colX = {
+            idx: margin + 2,
+            no: margin + 10,
+            name: margin + 23,
+            pos: margin + 68,
+            age: margin + 114,
+            foot: margin + 125,
+            nat: margin + 141,
+            pace: margin + 164,
+            drib: margin + 174,
+            shot: margin + 183
+          };
+
+          const drawTableHeader = (topY) => {
+            doc.setFillColor(15, 23, 42);
+            doc.rect(margin, topY, contentW, 8, "F");
+            doc.setTextColor(250, 204, 21);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(7.5);
+            doc.text("#", colX.idx, topY + 5.4);
+            doc.text("SHIRT", colX.no, topY + 5.4);
+            doc.text("PLAYER NAME", colX.name, topY + 5.4);
+            doc.text("POSITION", colX.pos, topY + 5.4);
+            doc.text("AGE", colX.age, topY + 5.4);
+            doc.text("FOOT", colX.foot, topY + 5.4);
+            doc.text("NATION", colX.nat, topY + 5.4);
+            doc.text("PAC", colX.pace, topY + 5.4);
+            doc.text("DRI", colX.drib, topY + 5.4);
+            doc.text("SHO", colX.shot, topY + 5.4);
+            return topY + 8;
+          };
+
+          y = drawTableHeader(y);
+          const rowH = 8.8;
+
+          SIMOLAT_SQUAD.forEach((p, i) => {
+            if (y + rowH > 280) {
+              doc.addPage();
+              y = drawTableHeader(14);
+            }
+            doc.setFillColor(i % 2 === 0 ? 248 : 255, i % 2 === 0 ? 250 : 255, i % 2 === 0 ? 252 : 255);
+            doc.setDrawColor(226, 232, 240);
+            doc.rect(margin, y, contentW, rowH, "FD");
+
+            doc.setTextColor(100, 116, 139);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(7.8);
+            doc.text(String(i + 1).padStart(2, "0"), colX.idx, y + 6);
+
+            doc.setTextColor(4, 120, 87);
+            doc.setFont("helvetica", "bold");
+            doc.text(`#${p.number}`, colX.no, y + 6);
+
+            doc.setTextColor(15, 23, 42);
+            doc.text(`${p.firstName} ${p.lastName}`, colX.name, y + 6);
+
+            doc.setTextColor(51, 65, 85);
+            doc.setFont("helvetica", "normal");
+            doc.text(p.position, colX.pos, y + 6);
+            doc.text(String(p.age), colX.age, y + 6);
+            doc.text(p.preferredFoot, colX.foot, y + 6);
+            doc.text(p.nationality, colX.nat, y + 6);
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(5, 150, 105);
+            doc.text(String(p.stats.pace), colX.pace, y + 6);
+            doc.setTextColor(180, 83, 9);
+            doc.text(String(p.stats.dribbling), colX.drib, y + 6);
+            doc.setTextColor(15, 23, 42);
+            doc.text(String(p.stats.shooting), colX.shot, y + 6);
+
+            y += rowH;
+          });
+
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(7.5);
+          doc.setTextColor(100, 116, 139);
+          doc.text("Simolat Football Academy • Official First Team Roster (23 Players) • admissions@simolatfootballacademy.ng", margin, 288);
+
+          doc.save("Simolat_First_Team_23_Player_Roster.pdf");
+          if (btnExportPdfLabel) {
+            btnExportPdfLabel.textContent = "✓ PDF Exported";
+            window.setTimeout(() => {
+              if (btnExportPdfLabel) btnExportPdfLabel.textContent = "Export Squad PDF";
+            }, 2200);
+          }
+        } catch (err) {
+          if (btnExportPdfLabel) {
+            btnExportPdfLabel.textContent = "Retry Export PDF";
+            window.setTimeout(() => {
+              if (btnExportPdfLabel) btnExportPdfLabel.textContent = "Export Squad PDF";
+            }, 2500);
+          }
+        } finally {
+          btnExportPdf.disabled = false;
+        }
+      }
+
+      if (btnFullscreen) btnFullscreen.addEventListener("click", toggleFullscreen);
+      if (btnExportPdf) btnExportPdf.addEventListener("click", exportSquadRosterPDF);
+      document.addEventListener("fullscreenchange", updateFullscreenBtn);
+      document.addEventListener("webkitfullscreenchange", updateFullscreenBtn);
+
+      sliderEl.addEventListener("mouseenter", () => { isHovered = true; stopAutoplayTimer(); });
+      sliderEl.addEventListener("mouseleave", () => { isHovered = false; startAutoplayTimer(); });
+
+      sliderEl.setAttribute("tabindex", "0");
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && sliderEl.classList.contains("theater-fullscreen")) {
+          sliderEl.classList.remove("theater-fullscreen");
+          updateFullscreenBtn();
+        } else if (e.key === "ArrowRight") { nextSlide(); restartAutoplayTimer(); }
+        else if (e.key === "ArrowLeft") { prevSlide(); restartAutoplayTimer(); }
+      });
+
+      sliderEl.addEventListener("touchstart", (e) => {
+        if (!e.touches || !e.touches[0]) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        stopAutoplayTimer();
+      }, { passive: true });
+
+      sliderEl.addEventListener("touchend", (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          if (deltaX < 0) nextSlide();
+          else prevSlide();
+        }
+        startAutoplayTimer();
+      }, { passive: true });
+
+      elPhotoImg.addEventListener("error", () => {
+        elPhotoImg.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+            <rect width="600" height="800" fill="#F1F5F9"/>
+            <circle cx="300" cy="260" r="95" fill="#CBD5E1"/>
+            <path d="M130 720 C130 500 470 500 470 720 Z" fill="#CBD5E1"/>
+            <text x="300" y="765" text-anchor="middle" fill="#065F46" font-family="sans-serif" font-size="22" font-weight="bold">SIMOLAT ACADEMY</text>
+          </svg>`
+        );
+      });
+
+      buildPagination();
+      renderPlayer(0);
+      startAutoplayTimer();
+    })();
+  </script>
+</body>
+</html>

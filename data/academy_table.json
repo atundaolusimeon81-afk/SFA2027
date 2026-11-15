@@ -1,0 +1,141 @@
+{
+  "teams": [
+    {
+      "id": "simolat-fa",
+      "name": "Simolat Football Academy",
+      "played": 5,
+      "won": 4,
+      "drawn": 1,
+      "lost": 0,
+      "gf": 12,
+      "ga": 3,
+      "gd": 9,
+      "pts": 13,
+      "form": [
+        "W",
+        "W",
+        "W",
+        "D",
+        "W"
+      ]
+    },
+    {
+      "id": "rising-stars",
+      "name": "Rising Stars FC",
+      "played": 5,
+      "won": 3,
+      "drawn": 1,
+      "lost": 1,
+      "gf": 9,
+      "ga": 5,
+      "gd": 4,
+      "pts": 10,
+      "form": [
+        "W",
+        "D",
+        "W",
+        "L",
+        "W"
+      ]
+    },
+    {
+      "id": "sahel-youth",
+      "name": "Sahel Youth",
+      "played": 5,
+      "won": 2,
+      "drawn": 2,
+      "lost": 1,
+      "gf": 7,
+      "ga": 6,
+      "gd": 1,
+      "pts": 8,
+      "form": [
+        "D",
+        "W",
+        "D",
+        "W",
+        "L"
+      ]
+    },
+    {
+      "id": "academy-utd",
+      "name": "Academy United",
+      "played": 5,
+      "won": 1,
+      "drawn": 1,
+      "lost": 3,
+      "gf": 4,
+      "ga": 10,
+      "gd": -6,
+      "pts": 4,
+      "form": [
+        "L",
+        "W",
+        "L",
+        "D",
+        "L"
+      ]
+    },
+    {
+      "id": "future-pro",
+      "name": "Future Pro FC",
+      "played": 5,
+      "won": 0,
+      "drawn": 1,
+      "lost": 4,
+      "gf": 2,
+      "ga": 10,
+      "gd": -8,
+      "pts": 1,
+      "form": [
+        "L",
+        "L",
+        "D",
+        "L",
+        "L"
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "id": "m-init-1",
+      "homeTeam": "Simolat Football Academy",
+      "awayTeam": "Rising Stars FC",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "date": "2026-10-04"
+    },
+    {
+      "id": "m-init-2",
+      "homeTeam": "Sahel Youth",
+      "awayTeam": "Future Pro FC",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "date": "2026-10-11"
+    },
+    {
+      "id": "m-init-3",
+      "homeTeam": "Academy United",
+      "awayTeam": "Simolat Football Academy",
+      "homeGoals": 0,
+      "awayGoals": 4,
+      "date": "2026-10-18"
+    },
+    {
+      "id": "m-init-4",
+      "homeTeam": "Rising Stars FC",
+      "awayTeam": "Future Pro FC",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "date": "2026-10-25"
+    },
+    {
+      "id": "m-init-5",
+      "homeTeam": "Simolat Football Academy",
+      "awayTeam": "Sahel Youth",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "date": "2026-11-01"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "referenceId": "SFA-REG-MWHG7UT8",
+    "fullName": "Test Player",
+    "age": 16,
+    "position": "Midfielder (MF)",
+    "phoneNumber": "+2348012345678",
+    "email": "test@example.com",
+    "recipient": "admissions@simolatfootballacademy.ng",
+    "submittedAt": "2026-11-15T06:23:30.236Z",
+    "emailSent": false
+  }
+]

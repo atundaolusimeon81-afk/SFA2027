@@ -1,0 +1,6 @@
+{
+  "name": "Simolat Sporting FC",
+  "description": "Official website of Simolat Sporting FC. Fixtures, match results, first team squad, league standings, ticketing, and official club merchandise.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

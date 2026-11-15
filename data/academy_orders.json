@@ -1,0 +1,61 @@
+[
+  {
+    "orderNumber": "SFA-2026-1042",
+    "customerName": "Adeyemi Balogun",
+    "destination": "Victoria Island, Lagos, Nigeria",
+    "carrier": "GIG Logistics Express",
+    "trackingWaybill": "GIG-IKY-994820",
+    "createdAt": "2026-11-12T22:50:43.555Z",
+    "baseStageIndex": 4,
+    "autoAdvance": false,
+    "items": [
+      {
+        "name": "Simolat Sporting 2026/2027 Home Jersey (Red)",
+        "details": "Size L • Crest Authentic Edition",
+        "price": "₦18,000"
+      }
+    ],
+    "totalLabel": "₦18,000"
+  },
+  {
+    "orderNumber": "SFA-2026-1088",
+    "customerName": "Chidi Nwankwo",
+    "destination": "Ilesha, Osun State, Nigeria",
+    "carrier": "DHL Express Nigeria",
+    "trackingWaybill": "DHL-NG-4471902",
+    "createdAt": "2026-11-13T08:50:43.555Z",
+    "baseStageIndex": 3,
+    "autoAdvance": false,
+    "items": [
+      {
+        "name": "Simolat Sporting 2026/2027 Away Jersey (Navy)",
+        "details": "Size M • Official Matchday Fit",
+        "price": "₦18,000"
+      },
+      {
+        "name": "Simolat Sporting 2026/2027 Home Jersey (White)",
+        "details": "Size L • Gold Collar Trim",
+        "price": "₦18,000"
+      }
+    ],
+    "totalLabel": "₦36,000"
+  },
+  {
+    "orderNumber": "SFA-2026-0991",
+    "customerName": "Kemi Adeosun",
+    "destination": "Lekki Phase 1, Lagos, Nigeria",
+    "carrier": "GIG Logistics Express",
+    "trackingWaybill": "GIG-LEK-771204",
+    "createdAt": "2026-11-11T12:50:43.555Z",
+    "baseStageIndex": 5,
+    "autoAdvance": false,
+    "items": [
+      {
+        "name": "Official 2026/27 Home Kit",
+        "details": "Custom: MARTINGS #14 (Size L)",
+        "price": "€85.00"
+      }
+    ],
+    "totalLabel": "€85.00"
+  }
+]

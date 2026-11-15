@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Simolat Football Academy - Main Administrative Office Location</title>
+    
+    <!-- Leaflet & Font Awesome Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        #map_container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .header-floating-card {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 16px 20px;
+            color: #ffffff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            max-width: 380px;
+        }
+        .badge-academy {
+            background: #047857;
+            color: #ecfdf5;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: #ffffff;
+            color: #0f172a;
+            border-radius: 12px;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .custom-popup .leaflet-popup-content {
+            margin: 0;
+            line-height: 1.5;
+        }
+        .custom-darkgreen-marker {
+            background: #047857;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(4,120,87,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="map_container">
+        <!-- Floating Info Overlay Card -->
+        <div class="header-floating-card">
+            <span class="badge-academy">Official HQ & Administrative Center</span>
+            <h5 style="margin: 0 0 6px 0; font-weight: 800; font-size: 17px;">Simolat Football Academy</h5>
+            <p style="margin: 0 0 6px 0; font-size: 13px; color: #cbd5e1; line-height: 1.4;">
+                <strong>📍 77 Awolowo Road, Ikoyi SW</strong>, Lagos State, Nigeria (Postcode: 101233)
+            </p>
+            <div style="background: rgba(2, 132, 199, 0.2); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 4px; margin-bottom: 8px;">
+                <strong style="color: #38bdf8; font-size: 12px; display: block;">🏢 Osun State Office:</strong>
+                <span style="font-size: 11px; color: #f1f5f9;">Ax14a Surulere Street, Isokun Ilesha Osun State, Nigeria. (Postcode: 233282)</span>
+            </div>
+            <div style="font-size: 12px; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 8px;">
+                <span style="color: #34d399; font-weight: 700;">● Operating Hours:</span> 9:00 AM – 5:00 PM (Mon - Sat)<br>
+                <span>📞 Box Office: +234 805 454 5933 • ⚽ Scouting: +234 803 040 1744</span>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <!-- Leaflet & Markers Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <script>
+        // 1. Coordinates for 77 Awolowo Road Ikoyi SW Lagos
+        const OFFICE_LAT = 6.4474;
+        const OFFICE_LNG = 3.4245;
+
+        // 2. Initialize Leaflet Map (equivalent to folium.Map)
+        const map = L.map('map', {
+            center: [OFFICE_LAT, OFFICE_LNG],
+            zoom: 16,
+            zoomControl: true,
+            scrollWheelZoom: true
+        });
+
+        // Add OpenStreetMap base tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 3. Custom dark green icon with sports/football theme
+        const footballIcon = L.divIcon({
+            className: 'custom-darkgreen-marker',
+            html: '<i class="fa-solid fa-futbol" style="font-size: 18px; color: #ffffff;"></i>',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -20]
+        });
+
+        // 4. Custom Popup HTML for Simolat Football Academy
+        const popupContent = `
+            <div style="font-family: 'Plus Jakarta Sans', Arial, sans-serif; min-width: 270px; padding: 0;">
+                <div style="background: #047857; color: #ffffff; padding: 10px 14px; font-weight: 800; font-size: 14px;">
+                    ⚽ Simolat Football Academy
+                </div>
+                <div style="padding: 14px; background: #ffffff;">
+                    <div style="font-weight: 800; color: #0f172a; font-size: 14px; margin-bottom: 4px;">
+                        Apex Elite Football Academy - Main Office
+                    </div>
+                    <div style="display: inline-block; background: #ecfdf5; color: #047857; font-weight: 800; font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid #10b981; margin-bottom: 10px;">
+                        Hours: 9 AM - 5 PM
+                    </div>
+                    <div style="font-size: 12px; color: #475569; line-height: 1.5; border-top: 1px solid #e2e8f0; padding-top: 8px;">
+                        <strong>📍 Main Administrative Office:</strong> 77 Awolowo Road, Ikoyi SW, Lagos State, Nigeria (Postcode: 101233)<br>
+                        <strong>🏢 Osun State Office:</strong> Ax14a Surulere Street, Isokun Ilesha Osun State, Nigeria. (Postcode: 233282)<br>
+                        <strong>📞 Official Lines:</strong> Box Office: +234 805 454 5933 | Scouting: +234 803 040 1744<br>
+                        <strong>🏢 Landmarks:</strong> Right next to Mobil Filling Station, 2 blocks north of SPAR Market, near Ribadu Junction & YMCA Building
+                    </div>
+                    <div style="margin-top: 10px; text-align: right;">
+                        <a href="https://maps.google.com/?q=${OFFICE_LAT},${OFFICE_LNG}" target="_blank" style="display: inline-block; background: #0284c7; color: #ffffff; padding: 4px 10px; font-size: 11px; font-weight: 700; border-radius: 4px; text-decoration: none;">
+                            Open in Google Maps ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 5. Add Main Office Marker with the exact requested tooltip and popup
+        const mainMarker = L.marker([OFFICE_LAT, OFFICE_LNG], { icon: footballIcon })
+            .addTo(map)
+            .bindTooltip("Apex Elite Football Academy - Main Office. Hours: 9 AM - 5 PM.", {
+                permanent: false,
+                direction: 'top',
+                className: 'academy-tooltip'
+            })
+            .bindPopup(popupContent, { className: 'custom-popup', maxWidth: 320 });
+
+        // Auto-open main popup on load
+        mainMarker.openPopup();
+
+        // 6. Add nearby key landmarks for orientation
+        const landmarks = [
+            {
+                name: "Mobil Filling Station (Right next to office)",
+                lat: 6.4477,
+                lng: 3.4243,
+                iconClass: "fa-gas-pump",
+                bgColor: "#0284c7"
+            },
+            {
+                name: "YMCA Building Ikoyi",
+                lat: 6.4485,
+                lng: 3.4250,
+                iconClass: "fa-building-columns",
+                bgColor: "#4f46e5"
+            },
+            {
+                name: "SPAR Market (2 blocks south)",
+                lat: 6.4442,
+                lng: 3.4230,
+                iconClass: "fa-cart-shopping",
+                bgColor: "#ea580c"
+            },
+            {
+                name: "Ribadu Junction / Falomo Bridge",
+                lat: 6.4428,
+                lng: 3.4255,
+                iconClass: "fa-road",
+                bgColor: "#9333ea"
+            }
+        ];
+
+        landmarks.forEach(lm => {
+            const landmarkIcon = L.divIcon({
+                className: 'custom-landmark-marker',
+                html: `<div style="background: ${lm.bgColor}; color: #ffffff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"><i class="fa-solid ${lm.iconClass}" style="font-size: 13px;"></i></div>`,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
+
+            L.marker([lm.lat, lm.lng], { icon: landmarkIcon })
+                .addTo(map)
+                .bindTooltip(lm.name, { direction: 'top' })
+                .bindPopup(`<div style="padding: 6px 10px; font-weight: 700; font-size: 12px; color: #0f172a;">${lm.name}</div>`);
+        });
+    </script>
+</body>
+</html>
